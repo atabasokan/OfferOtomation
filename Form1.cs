@@ -29,18 +29,49 @@ namespace OfferOtomation
 
             con.Open();
 
-            dr= cmd.ExecuteReader();
+            dr = cmd.ExecuteReader();
 
-            if(dr.HasRows)
+            if (dr.HasRows)
             {
+                con.Close();
                 Hide();
                 Form2 form2 = new Form2();
-                 form2.Show();
+                form2.Show();
             }
             else
             {
                 MessageBox.Show("Girilen Kullanıcı Bulunmamakta.Lütfen Kayıt Olun");
             }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                textBox2.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                textBox2.UseSystemPasswordChar = true;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            Hide();
+            Form3 form3 = new Form3();
+            form3.Show();
         }
     }
 }

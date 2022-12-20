@@ -52,7 +52,7 @@
             // 
             // button5
             // 
-            this.button5.ForeColor = System.Drawing.Color.Coral;
+            this.button5.ForeColor = System.Drawing.Color.Black;
             this.button5.Location = new System.Drawing.Point(75, 338);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(183, 67);
@@ -86,6 +86,7 @@
             this.button6.TabIndex = 17;
             this.button6.Text = "button6";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
@@ -95,6 +96,7 @@
             this.button7.TabIndex = 16;
             this.button7.Text = "button7";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // label1
             // 

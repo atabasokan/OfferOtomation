@@ -21,5 +21,19 @@ namespace OfferOtomation
         {
 
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Hide();
+            Form1 form1 = new Form1();
+            form1.Show();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Hide();
+            Form4 form4 = new Form4();
+            form4.Show();
+        }
     }
 }
