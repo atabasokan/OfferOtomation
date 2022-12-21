@@ -25,7 +25,7 @@ namespace OfferOtomation
         private void Form7_Load(object sender, EventArgs e)
         {
 
-            cmd = new SqlCommand("select * from Teklifler where sirket = @user", con);
+            cmd = new SqlCommand("select * from Teklifler where comp = @user", con);
             cmd.Parameters.AddWithValue("@user", user);
             con.Open();
             cmd.ExecuteNonQuery();
@@ -50,7 +50,7 @@ namespace OfferOtomation
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             
-            cmd = new SqlCommand("select * from Teklifler where sirket = @user", con);
+            cmd = new SqlCommand("select * from Teklifler where comp = @user", con);
             cmd.Parameters.AddWithValue("@user", user);
             con.Open();
             cmd.ExecuteNonQuery();

@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace OfferOtomation
 {
@@ -15,6 +9,7 @@ namespace OfferOtomation
     {
         SqlConnection con = new SqlConnection("Server=Okan\\Okan; Database = OfferOtomation;Trusted_Connection = True; MultipleActiveResultSets = true");
         SqlCommand cmd;
+        SqlDataReader dr;
         public Form3()
         {
             InitializeComponent();
@@ -32,23 +27,60 @@ namespace OfferOtomation
                 textBox2.UseSystemPasswordChar = true;
             }
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
-
             cmd = new SqlCommand("insert into Sirketler(username,userpass,tel) values (@username,@userpass,@tel)", con);
-            cmd.Parameters.AddWithValue("@username", textBox1.Text);
-            cmd.Parameters.AddWithValue("@userpass", textBox2.Text);
-            cmd.Parameters.AddWithValue("@tel", textBox3.Text);
-
+            cmd = new SqlCommand("select * from Sirketler where username='" + textBox1.Text + "'", con);
             con.Open();
+            dr = cmd.ExecuteReader();
+            if (String.IsNullOrEmpty(textBox1.Text) || String.IsNullOrEmpty(textBox2.Text) || String.IsNullOrEmpty(maskedTextBox1.Text))
+            {
+                MessageBox.Show("Lütfen Gerekli Bilgileri Doğru Giriniz.");
+            }
+            else if (dr.Read())
+            {
+                dr.Close();
+                MessageBox.Show("Girilen İsimdeki Şirket Zaten Kayıtlı ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@username", textBox1.Text);
+                cmd.Parameters.AddWithValue("@userpass", textBox2.Text);
+                cmd.Parameters.AddWithValue("@tel", maskedTextBox1);
 
-            cmd.ExecuteNonQuery();
 
-            con.Close();
-            Hide();
-            Form1 form1 = new Form1();
-            form1.Show();
+                cmd.ExecuteNonQuery();
+
+                con.Close();
+                Hide();
+                Form1 form1 = new Form1();
+                form1.Show();
+            }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form3_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

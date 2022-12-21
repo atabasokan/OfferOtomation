@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -58,6 +59,12 @@ namespace OfferOtomation
             Hide();
             Form7 form7 = new Form7(user);
             form7.Show();
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            label1.BackColor = System.Drawing.Color.Transparent;
+            label1.Text = user;
         }
     }
 }

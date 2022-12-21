@@ -27,6 +27,7 @@ namespace OfferOtomation
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -131,9 +132,11 @@ namespace OfferOtomation
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "HCGL TEKLİF HAZIRLAMA SİSTEMİ";
             this.ResumeLayout(false);
             this.PerformLayout();
 

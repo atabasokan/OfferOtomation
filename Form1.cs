@@ -9,7 +9,6 @@ namespace OfferOtomation
         SqlConnection con = new SqlConnection("Server=Okan\\Okan; Database = OfferOtomation;Trusted_Connection = True; MultipleActiveResultSets = true");
         SqlCommand cmd;
         SqlDataReader dr;
-        public int userId;
         public Form1()
         {
             InitializeComponent();
