@@ -14,10 +14,12 @@ namespace OfferOtomation
 {
     public partial class Form4 : Form
     {
-        SqlConnection con = new SqlConnection("Server=DESKTOP-C3380A2\\SQLEXPRESS01; Database = TeklifOto;Trusted_Connection = True; MultipleActiveResultSets = true");
+        SqlConnection con = new SqlConnection("Server=Okan\\Okan; Database = OfferOtomation;Trusted_Connection = True; MultipleActiveResultSets = true");
         SqlCommand cmd;
-        public Form4()
+        string sirket;
+        public Form4(string user)
         {
+            sirket = user;
             InitializeComponent();
         }
 
@@ -28,10 +30,11 @@ namespace OfferOtomation
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            cmd = new SqlCommand("insert into Teklifler(name,price) values (@name,@price)", con);
+            cmd = new SqlCommand("insert into Teklifler(name,price,birim,sirket) values (@name,@price,@birim,@sirket)", con);
             cmd.Parameters.AddWithValue("@name", textBox1.Text);
             cmd.Parameters.AddWithValue("@price", textBox2.Text);
+            cmd.Parameters.AddWithValue("@birim", comboBox1.SelectedItem);
+            cmd.Parameters.AddWithValue("@sirket", sirket);
 
             con.Open();
 
@@ -41,6 +44,11 @@ namespace OfferOtomation
             Hide();
             Form5 form5 = new Form5();
             form5.Show();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
