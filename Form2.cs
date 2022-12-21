@@ -12,8 +12,10 @@ namespace OfferOtomation
 {
     public partial class Form2 : Form
     {
-        public Form2()
+        string user;
+        public Form2(string a)
         {
+            user = a;
             InitializeComponent();
         }
 
@@ -32,8 +34,15 @@ namespace OfferOtomation
         private void button6_Click(object sender, EventArgs e)
         {
             Hide();
-            Form4 form4 = new Form4();
+            Form4 form4 = new Form4(user);
             form4.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Hide();
+            Form5 form5 = new Form5();
+            form5.Show();
         }
     }
 }
