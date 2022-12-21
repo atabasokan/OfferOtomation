@@ -42,13 +42,25 @@ namespace OfferOtomation
 
             con.Close();
             Hide();
-            Form5 form5 = new Form5();
+            Form5 form5 = new Form5(sirket);
             form5.Show();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form4_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Hide();
+            Form2 form2 = new Form2(sirket);
+            form2.Show();
         }
     }
 }

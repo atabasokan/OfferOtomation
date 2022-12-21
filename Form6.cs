@@ -13,6 +13,7 @@ namespace OfferOtomation
 {
     public partial class Form6 : Form
     {
+            string user;
         public Form6()
         {
             InitializeComponent();
@@ -20,6 +21,7 @@ namespace OfferOtomation
 
         private void Form6_Load(object sender, EventArgs e)
         {
+            
 
             string bugün = "http://www.tcmb.gov.tr/kurlar/today.xml";
             var xmldoc = new XmlDocument();
@@ -45,7 +47,7 @@ namespace OfferOtomation
         private void button1_Click(object sender, EventArgs e)
         {
             Hide();
-            Form2 form2 = new Form2();
+            Form2 form2 = new Form2(user);
             form2.Show();
         }
     }
