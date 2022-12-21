@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace OfferOtomation
 {
@@ -34,6 +35,18 @@ namespace OfferOtomation
             Hide();
             Form4 form4 = new Form4();
             form4.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Hide();
+            Form6 form6 = new Form6();
+            form6.Show();
         }
     }
 }
