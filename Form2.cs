@@ -26,6 +26,11 @@ namespace OfferOtomation
 
         }
 
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            label1.Text = user;
+        }
+
         private void button7_Click(object sender, EventArgs e)
         {
             Hide();
@@ -50,7 +55,7 @@ namespace OfferOtomation
         private void button4_Click(object sender, EventArgs e)
         {
             Hide();
-            Form6 form6 = new Form6();
+            Form6 form6 = new Form6(user);
             form6.Show();
         }
 
@@ -59,12 +64,6 @@ namespace OfferOtomation
             Hide();
             Form7 form7 = new Form7(user);
             form7.Show();
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-            label1.BackColor = System.Drawing.Color.Transparent;
-            label1.Text = user;
         }
     }
 }
