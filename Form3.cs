@@ -7,7 +7,7 @@ namespace OfferOtomation
 {
     public partial class Form3 : Form
     {
-        SqlConnection con = new SqlConnection("Server=Okan\\Okan; Database = OfferOtomation;Trusted_Connection = True; MultipleActiveResultSets = true");
+        SqlConnection con = new SqlConnection("Server=DESKTOP-C3380A2\\SQLEXPRESS01; Database = OfferOtomation;Trusted_Connection = True; MultipleActiveResultSets = true");
         SqlCommand cmd;
         SqlCommand cmd2;
         SqlDataReader dr;

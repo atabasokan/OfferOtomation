@@ -14,7 +14,7 @@ namespace OfferOtomation
 {
     public partial class Form4 : Form
     {
-        SqlConnection con = new SqlConnection("Server=Okan\\Okan; Database = OfferOtomation;Trusted_Connection = True; MultipleActiveResultSets = true");
+        SqlConnection con = new SqlConnection("Server=DESKTOP-C3380A2\\SQLEXPRESS01; Database = OfferOtomation;Trusted_Connection = True; MultipleActiveResultSets = true");
         SqlCommand cmd;
         string sirket;
         public Form4(string user)
@@ -55,8 +55,8 @@ namespace OfferOtomation
 
                 con.Close();
                 Hide();
-                Form5 form5 = new Form5(sirket);
-                form5.Show();
+                Form7 form7 = new Form7(sirket);
+                form7.Show();
             }
         }
 

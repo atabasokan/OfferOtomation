@@ -13,7 +13,7 @@ namespace OfferOtomation
 {
     public partial class Form7 : Form
     {
-        SqlConnection con = new SqlConnection("Server=Okan\\Okan; Database = OfferOtomation;Trusted_Connection = True; MultipleActiveResultSets = true");
+        SqlConnection con = new SqlConnection("Server=DESKTOP-C3380A2\\SQLEXPRESS01; Database = OfferOtomation;Trusted_Connection = True; MultipleActiveResultSets = true");
         SqlCommand cmd;
         string user;
         public Form7(string a)
@@ -33,14 +33,13 @@ namespace OfferOtomation
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
-            if (da != null)
+            if (dt.Rows.Count != 0)
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    this.dataGridView1.Rows.Add(dr["sirket"].ToString(), dr["name"].ToString(), dr["price"].ToString(), dr["birim"]);
+                    this.dataGridView1.Rows.Add(dr["comp"].ToString(), dr["name"].ToString(), dr["price"].ToString(), dr["currency"], dr["count"].ToString());
                 }
             }
-
             else
             {
                 MessageBox.Show("Aktif Teklifiniz Bulunmamakta.");
@@ -49,7 +48,7 @@ namespace OfferOtomation
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
             cmd = new SqlCommand("select * from Teklifler where comp = @user", con);
             cmd.Parameters.AddWithValue("@user", user);
             con.Open();
@@ -62,14 +61,22 @@ namespace OfferOtomation
             {
                 if (MessageBox.Show("Geçerli Teklifi Silmek istediğinize emin misiniz?", "Mesage", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    this.dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
-                    cmd = new SqlCommand("delete from Teklifler where name = @name",con);
-                    foreach (DataRow dr in dt.Rows)
+                    var row = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex];
+                    cmd = new SqlCommand("delete from Teklifler where name = @name and price = @price and currency = @currency ", con);
+                    foreach (DataRow dr  in dt.Rows)
                     {
-                        cmd.Parameters.AddWithValue("@name", dr["name"].ToString());
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        con.Close();
+                        if (row.Cells[1].FormattedValue.ToString() == dr.ItemArray[1].ToString() && row.Cells[2].FormattedValue.ToString() == dr.ItemArray[2].ToString() && row.Cells[3].FormattedValue.ToString() == dr.ItemArray[3].ToString())
+                        {
+                            cmd.Parameters.AddWithValue("@name", dr["name"].ToString());
+                            cmd.Parameters.AddWithValue("@price", dr["price"]);
+                            cmd.Parameters.AddWithValue("@currency", dr["currency"].ToString());
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                            Hide();
+                            Form7 form7 = new Form7(user);
+                            form7.Show();
+                        }
                     }
                 }
             }

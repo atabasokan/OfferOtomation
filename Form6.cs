@@ -14,8 +14,9 @@ namespace OfferOtomation
     public partial class Form6 : Form
     {
             string user;
-        public Form6()
+        public Form6(string a)
         {
+            user = a;
             InitializeComponent();
         }
 

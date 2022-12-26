@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace OfferOtomation
 {
     public partial class Form5 : Form
     {
-        SqlConnection con = new SqlConnection("Server=Okan\\Okan; Database = OfferOtomation;Trusted_Connection = True; MultipleActiveResultSets = true");
+        SqlConnection con = new SqlConnection("Server=DESKTOP-C3380A2\\SQLEXPRESS01; Database = OfferOtomation;Trusted_Connection = True; MultipleActiveResultSets = true");
         SqlCommand cmd;
         string a;
         public Form5(string user)
@@ -49,16 +50,23 @@ namespace OfferOtomation
             {
                 if (MessageBox.Show("Geçerli Teklifi Satın Almak İstediğinize Emin misiniz?", "Mesage", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cmd = new SqlCommand("update Teklifler set count = count-1 where name = @name", con);
+                    var row = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex];
+                    cmd = new SqlCommand("update Teklifler set count = count-1 where name = @name and price = @price and currency = @currency", con);
                     foreach (DataRow dr in dt.Rows)
                     {
-                        cmd.Parameters.AddWithValue("@name", dr["name"].ToString());
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        con.Close();
-                        Hide();
-                        Form2 form2 = new Form2(a);
-                        form2.Show();
+                        if (row.Cells[1].FormattedValue.ToString() == dr.ItemArray[1].ToString() && row.Cells[2].FormattedValue.ToString() == dr.ItemArray[2].ToString() && row.Cells[4].FormattedValue.ToString() == dr.ItemArray[3].ToString())
+                        {
+                            cmd.Parameters.AddWithValue("@name", dr["name"].ToString());
+                            cmd.Parameters.AddWithValue("@price", dr["price"].ToString());
+                            cmd.Parameters.AddWithValue("@currency", dr["currency"].ToString());
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                            MessageBox.Show("Satın Alım Gerçekleştirildi.");
+                            Hide();
+                            Form2 form2 = new Form2(a);
+                            form2.Show();
+                        }
                     }
                 }
             }
