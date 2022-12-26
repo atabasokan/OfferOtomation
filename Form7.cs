@@ -43,7 +43,7 @@ namespace OfferOtomation
 
             else
             {
-                MessageBox.Show("Girilen Kullanıcı Bulunmamakta.Lütfen Kayıt Olun");
+                MessageBox.Show("Aktif Teklifiniz Bulunmamakta.");
             }
         }
 

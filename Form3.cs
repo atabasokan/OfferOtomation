@@ -9,6 +9,7 @@ namespace OfferOtomation
     {
         SqlConnection con = new SqlConnection("Server=Okan\\Okan; Database = OfferOtomation;Trusted_Connection = True; MultipleActiveResultSets = true");
         SqlCommand cmd;
+        SqlCommand cmd2;
         SqlDataReader dr;
         public Form3()
         {
@@ -30,25 +31,26 @@ namespace OfferOtomation
         private void button1_Click(object sender, EventArgs e)
         {
             cmd = new SqlCommand("insert into Sirketler(username,userpass,tel) values (@username,@userpass,@tel)", con);
-            cmd = new SqlCommand("select * from Sirketler where username='" + textBox1.Text + "'", con);
+            cmd2 = new SqlCommand("select * from Sirketler where username='" + textBox1.Text + "'", con);
             con.Open();
-            dr = cmd.ExecuteReader();
+            dr = cmd2.ExecuteReader();
             if (String.IsNullOrEmpty(textBox1.Text) || String.IsNullOrEmpty(textBox2.Text) || String.IsNullOrEmpty(maskedTextBox1.Text))
             {
                 MessageBox.Show("Lütfen Gerekli Bilgileri Doğru Giriniz.");
             }
             else if (dr.Read())
             {
-                dr.Close();
+                con.Close();
                 MessageBox.Show("Girilen İsimdeki Şirket Zaten Kayıtlı ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
+                con.Close();
                 cmd.Parameters.AddWithValue("@username", textBox1.Text);
                 cmd.Parameters.AddWithValue("@userpass", textBox2.Text);
-                cmd.Parameters.AddWithValue("@tel", maskedTextBox1);
+                cmd.Parameters.AddWithValue("@tel", maskedTextBox1.Text);
 
-
+                con.Open();
                 cmd.ExecuteNonQuery();
 
                 con.Close();

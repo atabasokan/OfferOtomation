@@ -31,7 +31,7 @@ namespace OfferOtomation
         private void button1_Click(object sender, EventArgs e)
         {
             int price, count;
-            if (!int.TryParse(textBox2.Text, out price) || !int.TryParse(textBox3.Text, out count) || textBox2.Text == null || textBox3.Text == null)
+            if (!int.TryParse(textBox2.Text, out price) || !int.TryParse(textBox3.Text, out count) || textBox1.Text == null || textBox2.Text == null || textBox3.Text == null)
             {
                 MessageBox.Show("Lütfen Gerekli Bilgileri Doğru Giriniz.");
                 return;
