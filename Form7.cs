@@ -15,10 +15,10 @@ namespace OfferOtomation
     {
         SqlConnection con = new SqlConnection("Server=DESKTOP-C3380A2\\SQLEXPRESS01; Database = OfferOtomation;Trusted_Connection = True; MultipleActiveResultSets = true");
         SqlCommand cmd;
-        string user;
+        string sirket;
         public Form7(string a)
         {
-            user = a;
+            sirket = a;
             InitializeComponent();
         }
 
@@ -26,14 +26,14 @@ namespace OfferOtomation
         {
 
             cmd = new SqlCommand("select * from Teklifler where comp = @user", con);
-            cmd.Parameters.AddWithValue("@user", user);
+            cmd.Parameters.AddWithValue("@user", sirket);
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
-            if (dt.Rows.Count != 0)
+            if (dt.Rows.Count > 0)
             {
                 foreach (DataRow dr in dt.Rows)
                 {
@@ -50,7 +50,7 @@ namespace OfferOtomation
         {
 
             cmd = new SqlCommand("select * from Teklifler where comp = @user", con);
-            cmd.Parameters.AddWithValue("@user", user);
+            cmd.Parameters.AddWithValue("@user", sirket);
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
@@ -74,7 +74,7 @@ namespace OfferOtomation
                             cmd.ExecuteNonQuery();
                             con.Close();
                             Hide();
-                            Form7 form7 = new Form7(user);
+                            Form7 form7 = new Form7(sirket);
                             form7.Show();
                         }
                     }
@@ -85,7 +85,7 @@ namespace OfferOtomation
         private void button1_Click(object sender, EventArgs e)
         {
             Hide();
-            Form2 form2 = new Form2(user);
+            Form2 form2 = new Form2(sirket);
             form2.Show();
         }
     }

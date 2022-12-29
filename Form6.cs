@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -13,20 +6,20 @@ namespace OfferOtomation
 {
     public partial class Form6 : Form
     {
-            string user;
+        string sirket;
         public Form6(string a)
         {
-            user = a;
+            sirket = a;
             InitializeComponent();
         }
 
         private void Form6_Load(object sender, EventArgs e)
         {
-            
-
-            string bugün = "http://www.tcmb.gov.tr/kurlar/today.xml";
+            string kur = "http://www.tcmb.gov.tr/kurlar/today.xml";
+            // xmlDocument sınıfından yeni bir birey oluşturuyoruz
             var xmldoc = new XmlDocument();
-            xmldoc.Load(bugün);
+            // Oluşturduğumuz yeni bireye güncel kur verilerini yüklüyoruz
+            xmldoc.Load(kur);
             DateTime tarih = Convert.ToDateTime(xmldoc.SelectSingleNode("//Tarih_Date").Attributes["Tarih"].Value);
             string USD = xmldoc.SelectSingleNode("Tarih_Date/Currency [@Kod='USD']/ForexSelling").InnerXml;
             string EUR = xmldoc.SelectSingleNode("Tarih_Date/Currency [@Kod='EUR']/ForexSelling").InnerXml;
@@ -42,13 +35,13 @@ namespace OfferOtomation
             this.dataGridView1.Rows.Add(tarih.ToShortDateString(), "CNY", CNY);
             this.dataGridView1.Rows.Add(tarih.ToShortDateString(), "AUD", AUD);
             this.dataGridView1.Rows.Add(tarih.ToShortDateString(), "AZN", AZN);
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Hide();
-            Form2 form2 = new Form2(user);
+            Form2 form2 = new Form2(sirket);
             form2.Show();
         }
     }
