@@ -10,6 +10,7 @@ namespace OfferOtomation
     {
         SqlConnection con = new SqlConnection("Server=DESKTOP-C3380A2\\SQLEXPRESS01; Database = OfferOtomation;Trusted_Connection = True; MultipleActiveResultSets = true");
         SqlCommand cmd;
+        SqlCommand cmd2;
         string sirket;
         public Form5(string user)
         {
@@ -30,15 +31,19 @@ namespace OfferOtomation
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
             con.Close();
-            if (da != null)
+            if (dt.Rows.Count > 0)
             {
                 // da boş dönmedi ise foreach döngüsüne giriyoruz
                 // Bu döngü içerisinde ayrı ayrı Data Satırları oluşturuyoruz
                 foreach (DataRow dr in dt.Rows)
                 {
                     // Oluşturduğumuz datatabledaki tüm satırlar için aşağıdaki değerleri atıyoruz
-                    this.dataGridView1.Rows.Add(dr["comp"].ToString(), dr["name"].ToString(), dr["price"].ToString(), dr["count"].ToString(), dr["currency"]);
+                    this.dataGridView1.Rows.Add(dr["comp"].ToString(), dr["name"].ToString(), dr["price"].ToString(), dr["currency"], dr["count"].ToString());
                 }
+            }
+            else
+            {
+                MessageBox.Show("Aktif Teklif Bulunmamakta. Daha Sonra Tekrar Kontrol Ediniz.");
             }
         }
 
@@ -63,18 +68,31 @@ namespace OfferOtomation
                     // Tıklanan satırın değerlerini oluşturduğumuz variable değişkenine atıyoruz
                     var row = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex];
                     // commandimize yeni bir command atıyoruz
-                    cmd = new SqlCommand("update Teklifler set count = count-1 where name = @name and price = @price and currency = @currency", con);
+                    cmd = new SqlCommand("update Teklifler set count = count-1 where comp = @comp and name = @name and price = @price and currency = @currency", con);
                     foreach (DataRow dr in dt.Rows)
                     {
                         // Şirket adını kontrol etmeyi unuttuğumuz için aynı ürünü aynı fiyattan ve aynı birimden iki farklı şirket oluşturur ise ikisinide bir adet azaltır
-                        if (row.Cells[1].FormattedValue.ToString() == dr.ItemArray[1].ToString() && row.Cells[2].FormattedValue.ToString() == dr.ItemArray[2].ToString() && row.Cells[4].FormattedValue.ToString() == dr.ItemArray[3].ToString())
+                        if (row.Cells[0].FormattedValue.ToString() == dr["comp"].ToString() && row.Cells[1].FormattedValue.ToString() == dr["name"].ToString() && row.Cells[2].FormattedValue.ToString() == dr["price"].ToString() && row.Cells[3].FormattedValue.ToString() == dr["currency"].ToString() && row.Cells[4].FormattedValue.ToString() == dr["count"].ToString())
                         {
+                            cmd.Parameters.AddWithValue("@comp", dr["comp"].ToString());
                             cmd.Parameters.AddWithValue("@name", dr["name"].ToString());
-                            cmd.Parameters.AddWithValue("@price", dr["price"].ToString());
+                            cmd.Parameters.AddWithValue("@price", dr["price"]);
                             cmd.Parameters.AddWithValue("@currency", dr["currency"].ToString());
                             con.Open();
                             cmd.ExecuteNonQuery();
                             con.Close();
+                            if (row.Cells[4].FormattedValue.ToString() == "1")
+                            {
+                                cmd2 = new SqlCommand("delete from Teklifler where comp = @comp and name = @name and price = @price and currency = @currency", con);
+                                cmd2.Parameters.AddWithValue("@comp", dr["comp"].ToString());
+                                cmd2.Parameters.AddWithValue("@name", dr["name"].ToString());
+                                cmd2.Parameters.AddWithValue("@price", dr["price"]);
+                                cmd2.Parameters.AddWithValue("@currency", dr["currency"].ToString());
+                                con.Open();
+                                cmd2.ExecuteNonQuery();
+                                con.Close();
+
+                            }
                             MessageBox.Show("Satın Alım Gerçekleştirildi.");
                             Hide();
                             Form2 form2 = new Form2(sirket);

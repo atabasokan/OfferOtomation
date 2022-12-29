@@ -33,9 +33,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.Şirket = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ürün = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Adet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fiyat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Birim = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Adet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Al = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -46,9 +46,9 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Şirket,
             this.Ürün,
-            this.Adet,
             this.Fiyat,
             this.Birim,
+            this.Adet,
             this.Al});
             this.dataGridView1.Location = new System.Drawing.Point(12, 45);
             this.dataGridView1.Name = "dataGridView1";
@@ -89,12 +89,6 @@
             this.Ürün.Name = "Ürün";
             this.Ürün.ReadOnly = true;
             // 
-            // Adet
-            // 
-            this.Adet.HeaderText = "Adet";
-            this.Adet.Name = "Adet";
-            this.Adet.ReadOnly = true;
-            // 
             // Fiyat
             // 
             this.Fiyat.HeaderText = "Fiyat";
@@ -106,12 +100,16 @@
             this.Birim.HeaderText = "Birim";
             this.Birim.Name = "Birim";
             // 
+            // Adet
+            // 
+            this.Adet.HeaderText = "Adet";
+            this.Adet.Name = "Adet";
+            this.Adet.ReadOnly = true;
+            // 
             // Al
             // 
-            this.Al.HeaderText = "Eylem";
+            this.Al.HeaderText = "Al";
             this.Al.Name = "Al";
-            this.Al.ReadOnly = true;
-            this.Al.UseColumnTextForButtonValue = true;
             // 
             // Form5
             // 
@@ -139,9 +137,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Şirket;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ürün;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Adet;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fiyat;
         private System.Windows.Forms.DataGridViewTextBoxColumn Birim;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Adet;
         private System.Windows.Forms.DataGridViewButtonColumn Al;
     }
 }
